@@ -4,11 +4,40 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    
+
+    <fragment
+        android:id="@+id/fragmentLatestHeadlines"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="98dp"
+        class="com.moviefeel.fragments.LatestHeadlinesFragment" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etMovieSearch"
+            android:layout_width="189dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/btnMovieSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_weight="0.47"
+            android:text="Button" />
+
+    </LinearLayout>
 
 </RelativeLayout>
