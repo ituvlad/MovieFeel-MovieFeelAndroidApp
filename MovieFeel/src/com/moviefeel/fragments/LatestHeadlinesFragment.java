@@ -28,7 +28,7 @@ public class LatestHeadlinesFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View rootView = inflater.inflate(R.layout.latest_headlines_layout,
+		View rootView = inflater.inflate(R.layout.fragment_latest_headlines,
 				container, false);
 		if (GalImages != null && GalImages.length > 0) {
 			initUI(rootView);

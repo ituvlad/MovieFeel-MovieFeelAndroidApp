@@ -4,23 +4,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    
-
-    <fragment
-        android:id="@+id/fragmentLatestHeadlines"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="98dp"
-        class="com.moviefeel.fragments.LatestHeadlinesFragment" />
+    <!-- <fragment -->
+    <!-- android:id="@+id/fragmentLatestHeadlines" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_alignParentLeft="true" -->
+    <!-- android:layout_alignParentTop="true" -->
+    <!-- android:layout_marginTop="98dp" -->
+    <!-- class="com.moviefeel.fragments.LatestHeadlinesFragment" /> -->
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/etMovieSearch"
             android:layout_width="189dp"
             android:layout_height="match_parent"
@@ -28,7 +27,7 @@
             android:ems="10" >
 
             <requestFocus />
-        </EditText>
+        </AutoCompleteTextView>
 
         <Button
             android:id="@+id/btnMovieSearch"
@@ -37,7 +36,16 @@
             android:layout_marginTop="18dp"
             android:layout_weight="0.47"
             android:text="Button" />
-
     </LinearLayout>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="23dp" >
+    </FrameLayout>
 
 </RelativeLayout>
