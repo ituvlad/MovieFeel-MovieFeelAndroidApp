@@ -1,5 +1,7 @@
 package com.moviefeel.services.implementation;
 
+import java.util.ArrayList;
+
 import com.moviefeel.model.Movie;
 import com.moviefeel.services.IApi;
 import com.moviefeel.services.IMovieServices;
@@ -28,6 +30,14 @@ public class ApiMoviefeel implements IApi{
 			return movieServices.getMovieRating(movie);
 		}
 		return "";
+	}
+	@Override
+	public ArrayList<String> getMovieList() {
+		return movieServices.getMovieList();
+	}
+	@Override
+	public Movie getInitialMovieDetails(String movieTitle) {
+		return movieServices.getInitialMovieDetails(movieTitle);
 	}
 	
 	

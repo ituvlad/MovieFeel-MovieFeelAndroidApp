@@ -4,5 +4,13 @@
     <string name="app_name">MovieFeel</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="tv_mpaa_rating_title">MPAA Rating:</string>
+    <string name="tv_critics_consensus_title">Critics consensus:</string>
+    <string name="tv_critics_rating_title">Critics rating:</string>
+    <string name="tv_critics_score_title">Critics score:</string>
+    <string name="tv_audience_rating_title">Audience rating:</string>
+    <string name="tv_audience_score_title">Audience score:</string>
+    <string name="tv_runtime_title">Runtime:</string>
+    <string name="tv_synopsis_title">Synopsis:</string>
 
 </resources>

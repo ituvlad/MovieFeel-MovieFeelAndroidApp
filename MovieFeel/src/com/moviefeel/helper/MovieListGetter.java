@@ -14,11 +14,11 @@ import android.graphics.Point;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class SimpleGet extends AsyncTask<String, Void, ArrayList<String>> {
+public class MovieListGetter extends AsyncTask<String, Void, ArrayList<String>> {
 
 	ArrayList<String> results;
 
-	public SimpleGet() {
+	public MovieListGetter() {
 
 		results = new ArrayList<String>();
 	}

@@ -3,6 +3,8 @@ package com.moviefeel.activities;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,9 +12,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.moviefeel.fragments.MovieDetailsFragment;
 import com.moviefeel.helper.Api_Factory;
 import com.moviefeel.helper.Constants;
 import com.moviefeel.helper.GetHandler;
+import com.moviefeel.model.Movie;
 
 public class MainActivity extends BaseActivity {
 
@@ -33,7 +37,7 @@ public class MainActivity extends BaseActivity {
 	private void initUI() {
 		etMovieSearch = (AutoCompleteTextView) findViewById(R.id.etMovieSearch);
 		
-		ArrayList<String> myDBData=new GetHandler().executeGet();
+		ArrayList<String> myDBData = api.getMovieList();
         ArrayAdapter<String> adapter =
         		new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,myDBData);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -43,37 +47,30 @@ public class MainActivity extends BaseActivity {
 
 	}
 
-	private int[] GalImages = new int[] { R.drawable.one, R.drawable.two,
-			R.drawable.three };
-
 	private void setListeners(){
     	btnMovieSearch.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-//				LatestHeadlinesFragment contentFrag = new LatestHeadlinesFragment();
-//				contentFrag.GalImages = GalImages;
-//		        currentFragmentTag = LatestHeadlinesFragment.TAG;
-//		        FragmentManager fragmentManager = getSupportFragmentManager();
-//		        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//		        fragmentTransaction.replace(R.id.fragmentLatestHeadlines, contentFrag);
-//		        fragmentTransaction.commit();
-//				if (!etMovieSearch.getText().toString().equals("")){
-//					Movie movie = new Movie();
-//					movie.setTitle(etMovieSearch.getText().toString());
-//					String rating = api.getMovieRating(movie);
-//					
-//					
-//					MovieDetailsFragment contentFrag = new MovieDetailsFragment();
-//					contentFrag.setMovieRatingText(rating);
-//			        currentFragmentTag = MovieDetailsFragment.TAG;
-//			        FragmentManager fragmentManager = getSupportFragmentManager();
-//			        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//			        fragmentTransaction.add(R.id.fragment_container, contentFrag);
-//			        fragmentTransaction.commit();
-//				}
+				String title = etMovieSearch.getText().toString().split("\\(")[0].replace(' ', '+');
+				title = title.substring(0, title.length()-1);
+				Movie m = api.getInitialMovieDetails(title);
 				
+				MovieDetailsFragment contentFrag = new MovieDetailsFragment();
+				contentFrag.setMpaaRatingText( m.getMpaa_rating());
+				contentFrag.setCriticsConsensusText("\t" + m.getCritics_consensus());
+				contentFrag.setCriticsRatingText(m.getRatings().getCritics_rating());
+				contentFrag.setCriticsScoreText(m.getRatings().getCritics_score());
+				contentFrag.setAudienceRatingText(m.getRatings().getAudience_rating());
+				contentFrag.setAudienceScoreText(m.getRatings().getAudience_score());
+				contentFrag.setRuntimeText(m.getRuntime());
+				contentFrag.setSynopsisText(m.getSynopsis());
 				
+		        currentFragmentTag = MovieDetailsFragment.TAG;
+		        FragmentManager fragmentManager = getSupportFragmentManager();
+		        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		        fragmentTransaction.add(R.id.fragment_container, contentFrag);
+		        fragmentTransaction.commit();
 			}
 		});
     }

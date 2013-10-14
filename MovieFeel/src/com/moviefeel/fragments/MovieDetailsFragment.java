@@ -17,8 +17,27 @@ import android.widget.TextView;
 public class MovieDetailsFragment extends Fragment {
 	public static final String TAG = Constants.TAG_FRAGMENT_MOVIEDETAILS;
 
-	private String movieRatingText;
-	private TextView tvMovieRating;
+	private String mpaaRatingText;
+	private String criticsConsensusText;
+	private String criticsRatingText;
+	private String criticsScoreText;
+	private String audienceRatingText;
+	private String audienceScoreText;
+	private String runtimeText;
+	private String synopsisText;
+	
+	
+	
+
+	private TextView tvMpaaRating;
+	private TextView tvCriticsConsensus;
+	private TextView tvCriticsRating;
+	private TextView tvCriticsScore;
+	private TextView tvAudienceRating;
+	private TextView tvAudienceScore;
+	private TextView tvRuntime;
+	private TextView tvSynopsis;
+	
 	private Button btnSetDummyText;
 
 	public MovieDetailsFragment() {
@@ -39,27 +58,98 @@ public class MovieDetailsFragment extends Fragment {
 	}
 
 	private void initUI(View v) {
-		tvMovieRating = (TextView) v.findViewById(R.id.tvMovieRating);
-		btnSetDummyText = (Button) v.findViewById(R.id.btnSetDummyText);
+		tvMpaaRating = ((TextView) v.findViewById(R.id.tvMpaaRating));
+		tvCriticsConsensus = ((TextView) v
+				.findViewById(R.id.tvCriticsConsensus));
+		tvCriticsRating = ((TextView) v.findViewById(R.id.tvCriticsRating));
+		tvCriticsScore = ((TextView) v.findViewById(R.id.tvCriticsScore));
+		tvAudienceRating = ((TextView) v.findViewById(R.id.tvAudienceRating));
+		tvAudienceScore = ((TextView) v.findViewById(R.id.tvAudienceScore));
+		tvRuntime = ((TextView) v.findViewById(R.id.tvRuntime));
+		tvSynopsis = ((TextView) v.findViewById(R.id.tvSynopsis));
+//		btnSetDummyText = (Button) v.findViewById(R.id.btnSetDummyText);
+
+		tvMpaaRating.setText(mpaaRatingText);
+		tvCriticsConsensus.setText(criticsConsensusText);
+		tvCriticsRating.setText(criticsRatingText);
+		tvCriticsScore.setText(criticsScoreText);
+		tvAudienceRating.setText(audienceRatingText);
+		tvAudienceScore.setText(audienceScoreText);
+		tvRuntime.setText(runtimeText);
+		tvSynopsis.setText(synopsisText);
 	}
 
 	private void setListeners() {
-		btnSetDummyText.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				tvMovieRating.setText(movieRatingText);
-			}
-		});
+//		btnSetDummyText.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//			}
+//		});
 	}
 
-	public String getMovieRatingText() {
-		return movieRatingText;
+	public String getMpaaRatingText() {
+		return mpaaRatingText;
 	}
 
-	public void setMovieRatingText(String movieRatingText) {
-		this.movieRatingText = movieRatingText;
-		if (tvMovieRating != null)
-			tvMovieRating.setText(movieRatingText);
+	public void setMpaaRatingText(String mpaaRatingText) {
+		this.mpaaRatingText = mpaaRatingText;
+
+	}
+
+	public String getCriticsConsensusText() {
+		return criticsConsensusText;
+	}
+
+	public void setCriticsConsensusText(String criticsConsensusText) {
+		this.criticsConsensusText = criticsConsensusText;
+
+	}
+	public String getCriticsRatingText() {
+		return criticsRatingText;
+	}
+
+	public void setCriticsRatingText(String criticsRatingText) {
+		this.criticsRatingText = criticsRatingText;
+	}
+
+	public String getCriticsScoreText() {
+		return criticsScoreText;
+	}
+
+	public void setCriticsScoreText(String criticsScoreText) {
+		this.criticsScoreText = criticsScoreText;
+	}
+
+	public String getAudienceRatingText() {
+		return audienceRatingText;
+	}
+
+	public void setAudienceRatingText(String audienceRatingText) {
+		this.audienceRatingText = audienceRatingText;
+	}
+
+	public String getAudienceScoreText() {
+		return audienceScoreText;
+	}
+
+	public void setAudienceScoreText(String audienceScoreText) {
+		this.audienceScoreText = audienceScoreText;
+	}
+
+	public String getRuntimeText() {
+		return runtimeText;
+	}
+
+	public void setRuntimeText(String runtimeText) {
+		this.runtimeText = runtimeText;
+	}
+
+	public String getSynopsisText() {
+		return synopsisText;
+	}
+
+	public void setSynopsisText(String synopsisText) {
+		this.synopsisText = synopsisText;
 	}
 }
