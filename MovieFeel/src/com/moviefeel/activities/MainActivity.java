@@ -54,17 +54,10 @@ public class MainActivity extends BaseActivity {
 			public void onClick(View v) {
 				String title = etMovieSearch.getText().toString().split("\\(")[0].replace(' ', '+');
 				title = title.substring(0, title.length()-1);
-				Movie m = api.getInitialMovieDetails(title);
 				
 				MovieDetailsFragment contentFrag = new MovieDetailsFragment();
-				contentFrag.setMpaaRatingText( m.getMpaa_rating());
-				contentFrag.setCriticsConsensusText("\t" + m.getCritics_consensus());
-				contentFrag.setCriticsRatingText(m.getRatings().getCritics_rating());
-				contentFrag.setCriticsScoreText(m.getRatings().getCritics_score());
-				contentFrag.setAudienceRatingText(m.getRatings().getAudience_rating());
-				contentFrag.setAudienceScoreText(m.getRatings().getAudience_score());
-				contentFrag.setRuntimeText(m.getRuntime());
-				contentFrag.setSynopsisText(m.getSynopsis());
+				contentFrag.setApi(api);
+				contentFrag.setMovieTitle(title);
 				
 		        currentFragmentTag = MovieDetailsFragment.TAG;
 		        FragmentManager fragmentManager = getSupportFragmentManager();

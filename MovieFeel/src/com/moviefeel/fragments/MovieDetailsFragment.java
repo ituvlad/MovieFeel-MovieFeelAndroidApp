@@ -1,33 +1,20 @@
 package com.moviefeel.fragments;
 
-import com.moviefeel.activities.R;
-import com.moviefeel.adapters.ImageAdapter;
-import com.moviefeel.helper.Constants;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.moviefeel.activities.R;
+import com.moviefeel.helper.Constants;
+import com.moviefeel.model.Movie;
+import com.moviefeel.services.IApi;
+
 public class MovieDetailsFragment extends Fragment {
 	public static final String TAG = Constants.TAG_FRAGMENT_MOVIEDETAILS;
-
-	private String mpaaRatingText;
-	private String criticsConsensusText;
-	private String criticsRatingText;
-	private String criticsScoreText;
-	private String audienceRatingText;
-	private String audienceScoreText;
-	private String runtimeText;
-	private String synopsisText;
-	
-	
-	
 
 	private TextView tvMpaaRating;
 	private TextView tvCriticsConsensus;
@@ -39,6 +26,10 @@ public class MovieDetailsFragment extends Fragment {
 	private TextView tvSynopsis;
 	
 	private Button btnSetDummyText;
+	
+	private IApi api;
+	private String movieTitle;
+	private Movie movie;
 
 	public MovieDetailsFragment() {
 
@@ -50,7 +41,9 @@ public class MovieDetailsFragment extends Fragment {
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.fragment_movie_details,
 				container, false);
-
+		
+		movie = api.getInitialMovieDetails(movieTitle);
+		
 		initUI(rootView);
 		setListeners();
 
@@ -68,15 +61,15 @@ public class MovieDetailsFragment extends Fragment {
 		tvRuntime = ((TextView) v.findViewById(R.id.tvRuntime));
 		tvSynopsis = ((TextView) v.findViewById(R.id.tvSynopsis));
 //		btnSetDummyText = (Button) v.findViewById(R.id.btnSetDummyText);
-
-		tvMpaaRating.setText(mpaaRatingText);
-		tvCriticsConsensus.setText(criticsConsensusText);
-		tvCriticsRating.setText(criticsRatingText);
-		tvCriticsScore.setText(criticsScoreText);
-		tvAudienceRating.setText(audienceRatingText);
-		tvAudienceScore.setText(audienceScoreText);
-		tvRuntime.setText(runtimeText);
-		tvSynopsis.setText(synopsisText);
+		
+		tvMpaaRating.setText(movie.getMpaa_rating());
+		tvCriticsConsensus.setText(movie.getCritics_consensus());
+		tvCriticsRating.setText(movie.getRatings().getCritics_rating());
+		tvCriticsScore.setText(movie.getRatings().getCritics_score());
+		tvAudienceRating.setText(movie.getRatings().getAudience_rating());
+		tvAudienceScore.setText(movie.getRatings().getAudience_score());
+		tvRuntime.setText(movie.getRuntime());
+		tvSynopsis.setText(movie.getSynopsis());
 	}
 
 	private void setListeners() {
@@ -88,68 +81,20 @@ public class MovieDetailsFragment extends Fragment {
 //		});
 	}
 
-	public String getMpaaRatingText() {
-		return mpaaRatingText;
+
+	public IApi getApi() {
+		return api;
 	}
 
-	public void setMpaaRatingText(String mpaaRatingText) {
-		this.mpaaRatingText = mpaaRatingText;
-
+	public void setApi(IApi api) {
+		this.api = api;
 	}
 
-	public String getCriticsConsensusText() {
-		return criticsConsensusText;
+	public String getMovieTitle() {
+		return movieTitle;
 	}
 
-	public void setCriticsConsensusText(String criticsConsensusText) {
-		this.criticsConsensusText = criticsConsensusText;
-
-	}
-	public String getCriticsRatingText() {
-		return criticsRatingText;
-	}
-
-	public void setCriticsRatingText(String criticsRatingText) {
-		this.criticsRatingText = criticsRatingText;
-	}
-
-	public String getCriticsScoreText() {
-		return criticsScoreText;
-	}
-
-	public void setCriticsScoreText(String criticsScoreText) {
-		this.criticsScoreText = criticsScoreText;
-	}
-
-	public String getAudienceRatingText() {
-		return audienceRatingText;
-	}
-
-	public void setAudienceRatingText(String audienceRatingText) {
-		this.audienceRatingText = audienceRatingText;
-	}
-
-	public String getAudienceScoreText() {
-		return audienceScoreText;
-	}
-
-	public void setAudienceScoreText(String audienceScoreText) {
-		this.audienceScoreText = audienceScoreText;
-	}
-
-	public String getRuntimeText() {
-		return runtimeText;
-	}
-
-	public void setRuntimeText(String runtimeText) {
-		this.runtimeText = runtimeText;
-	}
-
-	public String getSynopsisText() {
-		return synopsisText;
-	}
-
-	public void setSynopsisText(String synopsisText) {
-		this.synopsisText = synopsisText;
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 }
