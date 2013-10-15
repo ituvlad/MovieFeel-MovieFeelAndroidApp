@@ -12,5 +12,10 @@
     <string name="tv_audience_score_title">Audience score:</string>
     <string name="tv_runtime_title">Runtime:</string>
     <string name="tv_synopsis_title">Synopsis:</string>
+    <string name="tv_introduce_ip">IP Address:</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="menu_ip_address">Ip</string>
+    <string name="btn_search">Search</string>
 
 </resources>

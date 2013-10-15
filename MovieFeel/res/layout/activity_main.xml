@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:layout_weight="0.47"
-            android:text="Button" />
+            android:text="@string/btn_search" />
     </LinearLayout>
 
     <FrameLayout
@@ -47,5 +47,6 @@
         android:layout_below="@+id/linearLayout1"
         android:layout_marginTop="23dp" >
     </FrameLayout>
+
 
 </RelativeLayout>

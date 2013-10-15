@@ -1,5 +1,6 @@
 package com.moviefeel.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -30,6 +31,8 @@ public class MovieDetailsFragment extends Fragment {
 	private IApi api;
 	private String movieTitle;
 	private Movie movie;
+	
+	private Activity act;
 
 	public MovieDetailsFragment() {
 
@@ -42,12 +45,20 @@ public class MovieDetailsFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_movie_details,
 				container, false);
 		
-		movie = api.getInitialMovieDetails(movieTitle);
+		movie = api.getInitialMovieDetails(act,movieTitle);
 		
 		initUI(rootView);
 		setListeners();
 
 		return rootView;
+	}
+
+	public Activity getAct() {
+		return act;
+	}
+
+	public void setAct(Activity act) {
+		this.act = act;
 	}
 
 	private void initUI(View v) {

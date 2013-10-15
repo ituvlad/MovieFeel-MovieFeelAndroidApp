@@ -2,6 +2,8 @@ package com.moviefeel.services.implementation;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+
 import com.moviefeel.model.Movie;
 import com.moviefeel.services.IApi;
 import com.moviefeel.services.IMovieServices;
@@ -32,12 +34,12 @@ public class ApiMoviefeel implements IApi{
 		return "";
 	}
 	@Override
-	public ArrayList<String> getMovieList() {
-		return movieServices.getMovieList();
+	public ArrayList<String> getMovieList(Activity act) {
+		return movieServices.getMovieList(act);
 	}
 	@Override
-	public Movie getInitialMovieDetails(String movieTitle) {
-		return movieServices.getInitialMovieDetails(movieTitle);
+	public Movie getInitialMovieDetails(Activity act,String movieTitle) {
+		return movieServices.getInitialMovieDetails(act,movieTitle);
 	}
 	
 	

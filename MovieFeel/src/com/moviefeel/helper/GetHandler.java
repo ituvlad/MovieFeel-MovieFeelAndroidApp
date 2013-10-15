@@ -4,32 +4,37 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import com.moviefeel.model.Movie;
-
 import android.app.Activity;
+import android.widget.Toast;
+
+import com.moviefeel.model.Movie;
 
 
 public class GetHandler {
-
+	
+	
 	private MovieListGetter movieListGetter;
 	private MovieDetailsGetter movieDetailsGetter;
 	
 	private WeakReference<Activity> reference;
+	private String ipAddress;
+	private Activity act;
 	
 	public GetHandler(Activity act){
+		this.act = act;
 		reference=new WeakReference<Activity>(act);
 		movieListGetter = new MovieListGetter();
 		movieDetailsGetter = new MovieDetailsGetter();
-	}
-	public GetHandler(){
-		movieListGetter = new MovieListGetter();
-		movieDetailsGetter = new MovieDetailsGetter();
+		ipAddress = getIpAddress();
+		if ( ipAddress == null){
+			ipAddress = Constants.DEFAULT_IP_ADDRESS;
+		}
 	}
 	
 	public ArrayList<String> getMovieList(){
 		ArrayList<String> arr = null;
 		try {
-			arr = movieListGetter.execute("http://192.168.1.100:8080/MovieFeel-0.1/rest/getAllMovieTitles").get();
+			arr = movieListGetter.execute("http://"+ipAddress+"/MovieFeel-0.1/rest/getAllMovieTitles").get();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		} catch (ExecutionException e1) {
@@ -41,7 +46,7 @@ public class GetHandler {
 	public Movie getInitialMovieDetails(String movieTitle){
 		Movie movie = null;
 		try {
-			movie = movieDetailsGetter.execute("http://192.168.1.100:8080/MovieFeel-0.1/rest/getInitialMovieDetailsForTitle?title="+movieTitle).get();
+			movie = movieDetailsGetter.execute("http://"+ipAddress+"/MovieFeel-0.1/rest/getInitialMovieDetailsForTitle?title="+movieTitle).get();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		} catch (ExecutionException e1) {
@@ -50,18 +55,7 @@ public class GetHandler {
 		return movie;
 	}
 	
-//	public ArrayList<String> executeGet(String url){
-//		
-//		try {
-//			return myGet.execute(url).get();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ExecutionException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return null;
-//	}
+	private String getIpAddress(){
+		return  new IOHelper(act).restoreList(Constants.FILENAME);
+	}
 }
