@@ -3,25 +3,41 @@ package com.moviefeel.model;
 import java.util.ArrayList;
 
 public class Movie {
+	/**
+	 * Private attributes
+	 */
 	private String title;
-	private Rating rating;
+	
 	private String mpaa_rating;
 	private String critics_consensus;
 	private String runtime;
 	private String synopsis;
 	
+	private Poster poster;
+	private Rating rating;
+	
+	/**
+	 * Constructors
+	 */
+	
 	public Movie(){}
 	
 	
-	public Movie(Rating rating, String mpaa_rating,
+	public Movie(Rating rating,Poster poster, String mpaa_rating,
 			String critics_consensus,String runtime,String synopsis) {
 		super();
 		this.rating = rating;
+		this.setPoster(poster);
 		this.mpaa_rating = mpaa_rating;
 		this.critics_consensus = critics_consensus;
 		this.runtime = runtime;
 		this.synopsis = synopsis;
 	}
+	
+	/**
+	 * Getters and setters
+	 * @return
+	 */
 	public String getTitle() {
 		return title;
 	}
@@ -65,6 +81,16 @@ public class Movie {
 
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
+	}
+
+
+	public Poster getPoster() {
+		return poster;
+	}
+
+
+	public void setPoster(Poster poster) {
+		this.poster = poster;
 	}
 
 }

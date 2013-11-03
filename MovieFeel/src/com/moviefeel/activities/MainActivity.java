@@ -2,6 +2,8 @@ package com.moviefeel.activities;
 
 import java.util.ArrayList;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,15 +13,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.moviefeel.dialogs.IpAddressDialog;
 import com.moviefeel.fragments.MovieDetailsFragment;
 import com.moviefeel.helper.Api_Factory;
+import com.moviefeel.helper.ConnectivityHelper;
 import com.moviefeel.helper.Constants;
-import com.moviefeel.helper.GetHandler;
-import com.moviefeel.model.Movie;
+import com.moviefeel.helper.ObjectTransporter;
 
 public class MainActivity extends BaseActivity {
 	/***
@@ -41,13 +42,33 @@ public class MainActivity extends BaseActivity {
 	private void initUI() {
 
 		etMovieSearch = (AutoCompleteTextView) findViewById(R.id.etMovieSearch);
-
-		ArrayList<String> myDBData = api.getMovieList(this);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-				MainActivity.this, android.R.layout.simple_list_item_1,
-				myDBData);
-		adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-		etMovieSearch.setAdapter(adapter);
+		
+//		ObjectTransporter dw = (ObjectTransporter) getIntent().getSerializableExtra("movieList");
+//		ArrayList<String> list = dw.getMovies();
+//
+//		if (list != null) {
+//			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+//					MainActivity.this, android.R.layout.simple_list_item_1,
+//					list);
+//			adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+//			etMovieSearch.setAdapter(adapter);
+//		}
+//		else {
+//			Toast.makeText(this, "Error while fetching data!", Toast.LENGTH_SHORT).show();
+//		}
+		try{
+		if (ConnectivityHelper.isDataConnectionActivated(this)
+				|| ConnectivityHelper.isWiFiEnabled(this)) {
+			ArrayList<String> myDBData = api.getMovieList(this);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+					MainActivity.this, android.R.layout.simple_list_item_1,
+					myDBData);
+			adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+			etMovieSearch.setAdapter(adapter);
+		}
+		}catch(Exception e){
+			Toast.makeText(this, "Connection timed out", Toast.LENGTH_SHORT).show();
+		}
 
 		btnMovieSearch = (Button) findViewById(R.id.btnMovieSearch);
 

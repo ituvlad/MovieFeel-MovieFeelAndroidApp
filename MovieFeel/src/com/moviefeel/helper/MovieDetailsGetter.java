@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import com.moviefeel.activities.MainActivity;
 import com.moviefeel.model.Movie;
+import com.moviefeel.model.Poster;
 import com.moviefeel.model.Rating;
 
 import android.graphics.Point;
@@ -37,14 +38,18 @@ public class MovieDetailsGetter extends AsyncTask<String, Void, Movie> {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					tc.getInputStream()));
 
-			JSONObject ratingObject = null;
+			
 			JSONObject js = new JSONObject(in.readLine());
 
 			Rating rating = null;
+			Poster poster = null;
+			
 			String mpaa_rating = null;
 			String critics_consensus = null;
 			String runtime = null;
 			String synopsis = null;
+			JSONObject ratingObject = null;
+			JSONObject posters = null;
 
 			if (js.has("critics_consensus"))
 				critics_consensus = js.getString("critics_consensus");
@@ -54,15 +59,42 @@ public class MovieDetailsGetter extends AsyncTask<String, Void, Movie> {
 				runtime = js.getString("runtime");
 			if (js.has("synopsis"))
 				synopsis = js.getString("synopsis");
+			if (js.has("posters"))
+				posters = js.getJSONObject("posters");
 			 if (js.has("ratings"))
 				 ratingObject = js.getJSONObject("ratings");
 
 			rating = getMovieRating(ratingObject);
+			poster = getMoviePoster(posters);
 
-			movie = new Movie(rating,mpaa_rating,critics_consensus,runtime,synopsis);
+			movie = new Movie(rating,poster,mpaa_rating,critics_consensus,runtime,synopsis);
 			
 			return movie;
 
+		} catch (Exception e) {
+			Log.e("Image", "Failed to load initial movie details", e);
+			return null;
+		}
+	}
+	
+	private Poster getMoviePoster(JSONObject posters){
+		try {
+			String thumbnail = null;
+			String detailed = null;
+			String original = null;
+			String profile = null;
+			
+			if (posters.has("thumbnail"))
+				thumbnail = posters.getString("thumbnail");
+			if (posters.has("detailed"))
+				detailed = posters.getString("detailed");
+			if (posters.has("original"))
+				original = posters.getString("original");
+			if (posters.has("profile"))
+				profile = posters.getString("profile");
+			
+			return new Poster(thumbnail, detailed, original,
+					profile);
 		} catch (Exception e) {
 			Log.e("Image", "Failed to load initial movie details", e);
 			return null;

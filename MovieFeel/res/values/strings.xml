@@ -17,5 +17,7 @@
     <string name="btn_cancel">Cancel</string>
     <string name="menu_ip_address">Ip</string>
     <string name="btn_search">Search</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="loading">Loading...</string>
 
 </resources>
