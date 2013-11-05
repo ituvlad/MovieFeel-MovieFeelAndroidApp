@@ -2,17 +2,18 @@ package com.moviefeel.activities;
 
 import java.util.ArrayList;
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.moviefeel.dialogs.IpAddressDialog;
@@ -20,13 +21,8 @@ import com.moviefeel.fragments.MovieDetailsFragment;
 import com.moviefeel.helper.Api_Factory;
 import com.moviefeel.helper.ConnectivityHelper;
 import com.moviefeel.helper.Constants;
-import com.moviefeel.helper.ObjectTransporter;
 
 public class MainActivity extends BaseActivity {
-	/***
-	 * https://github.com/ituvlad/MovieFeel-MovieFeelAndroidApp.git
-	 */
-	private String currentFragmentTag;
 	private AutoCompleteTextView etMovieSearch;
 	private Button btnMovieSearch;
 
@@ -40,38 +36,31 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void initUI() {
-
 		etMovieSearch = (AutoCompleteTextView) findViewById(R.id.etMovieSearch);
-		
-//		ObjectTransporter dw = (ObjectTransporter) getIntent().getSerializableExtra("movieList");
-//		ArrayList<String> list = dw.getMovies();
-//
-//		if (list != null) {
-//			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//					MainActivity.this, android.R.layout.simple_list_item_1,
-//					list);
-//			adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-//			etMovieSearch.setAdapter(adapter);
-//		}
-//		else {
-//			Toast.makeText(this, "Error while fetching data!", Toast.LENGTH_SHORT).show();
-//		}
-		try{
-		if (ConnectivityHelper.isDataConnectionActivated(this)
-				|| ConnectivityHelper.isWiFiEnabled(this)) {
-			ArrayList<String> myDBData = api.getMovieList(this);
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-					MainActivity.this, android.R.layout.simple_list_item_1,
-					myDBData);
-			adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-			etMovieSearch.setAdapter(adapter);
-		}
-		}catch(Exception e){
-			Toast.makeText(this, "Connection timed out", Toast.LENGTH_SHORT).show();
-		}
-
+		populateDropDownCombo();
 		btnMovieSearch = (Button) findViewById(R.id.btnMovieSearch);
-
+		
+	}
+	
+	private void populateDropDownCombo(){
+		try {
+			if (ConnectivityHelper.isDataConnectionActivated(this)
+					|| ConnectivityHelper.isWiFiEnabled(this)) {
+				ArrayList<String> myDBData = api.getMovieList(this);
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+						MainActivity.this, android.R.layout.simple_list_item_1,
+						myDBData);
+				adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+				etMovieSearch.setAdapter(adapter);
+			}
+			else {
+				Toast.makeText(this, "Please enable a data connection!", Toast.LENGTH_SHORT)
+				.show();
+			}
+		} catch (Exception e) {
+			Toast.makeText(this, "Connection timed out", Toast.LENGTH_SHORT)
+					.show();
+		}
 	}
 
 	private void setListeners() {
@@ -79,21 +68,32 @@ public class MainActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				String title = etMovieSearch.getText().toString().split("\\(")[0]
-						.replace(' ', '+');
-				title = title.substring(0, title.length() - 1);
+				try {
+					String title = etMovieSearch.getText().toString()
+							.split("\\(")[0].replace(' ', '+');
+					title = title.substring(0, title.length() - 1);
 
-				MovieDetailsFragment contentFrag = new MovieDetailsFragment();
-				contentFrag.setAct(MainActivity.this);
-				contentFrag.setApi(api);
-				contentFrag.setMovieTitle(title);
+					MovieDetailsFragment contentFrag = new MovieDetailsFragment();
+					contentFrag.setAct(MainActivity.this);
+					contentFrag.setApi(api);
+					contentFrag.setMovieTitle(title);
+					contentFrag.setMovieNiceFormatTitle(etMovieSearch.getText().toString());
 
-				currentFragmentTag = MovieDetailsFragment.TAG;
-				FragmentManager fragmentManager = getSupportFragmentManager();
-				FragmentTransaction fragmentTransaction = fragmentManager
-						.beginTransaction();
-				fragmentTransaction.add(R.id.fragment_container, contentFrag);
-				fragmentTransaction.commit();
+					FragmentManager fragmentManager = getSupportFragmentManager();
+					FragmentTransaction fragmentTransaction = fragmentManager
+							.beginTransaction();
+					fragmentTransaction.replace(R.id.fragment_container,
+							contentFrag);
+					fragmentTransaction.commit();
+					
+					RelativeLayout mainLayout;
+					mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
+					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
+				} catch (Exception e) {
+					Toast.makeText(MainActivity.this, "Error while searching!", Toast.LENGTH_SHORT)
+					.show();
+				}
 			}
 		});
 	}
@@ -107,12 +107,16 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.menu_ip_address:
 			new IpAddressDialog(MainActivity.this);
 			break;
+		case R.id.menu_refresh_list:
+			populateDropDownCombo();
+			break;
+		
 		}
+		
 		return super.onMenuItemSelected(featureId, item);
 	}
 

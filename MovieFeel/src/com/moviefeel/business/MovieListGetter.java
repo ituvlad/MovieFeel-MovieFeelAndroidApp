@@ -1,4 +1,4 @@
-package com.moviefeel.helper;
+package com.moviefeel.business;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,9 +8,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.util.Log;
 

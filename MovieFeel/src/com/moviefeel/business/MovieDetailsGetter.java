@@ -1,4 +1,4 @@
-package com.moviefeel.helper;
+package com.moviefeel.business;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -7,18 +7,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.moviefeel.activities.MainActivity;
 import com.moviefeel.model.Movie;
 import com.moviefeel.model.Poster;
 import com.moviefeel.model.Rating;
 
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 public class MovieDetailsGetter extends AsyncTask<String, Void, Movie> {
 

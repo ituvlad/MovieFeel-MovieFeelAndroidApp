@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    android:id="@+id/mainLayout"
+    tools:context=".MainActivity" 
+    android:background="@drawable/background">
 
     <!-- <fragment -->
     <!-- android:id="@+id/fragmentLatestHeadlines" -->
@@ -23,7 +25,9 @@
             android:id="@+id/etMovieSearch"
             android:layout_width="189dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.31"
+            android:textColor="#FFFFFF"
             android:ems="10" >
 
             <requestFocus />
@@ -35,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:layout_weight="0.47"
+            android:textColor="#FFFFFF"
             android:text="@string/btn_search" />
     </LinearLayout>
 

@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutionException;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.moviefeel.business.MovieDetailsGetter;
+import com.moviefeel.business.MovieListGetter;
 import com.moviefeel.model.Movie;
 
 
