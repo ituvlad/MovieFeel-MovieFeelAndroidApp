@@ -22,5 +22,6 @@
     <string name="menu_refresh_list">Refresh</string>
     <string name="not_available">Not available</string>
     <string name="btn_do_opinion_mining_text">Get statistics</string>
-
+    <string name="cannot_contact_server">Cannot contact server!</string>
+	<string name="enable_data_connection">Please enable data connection.</string>
 </resources>

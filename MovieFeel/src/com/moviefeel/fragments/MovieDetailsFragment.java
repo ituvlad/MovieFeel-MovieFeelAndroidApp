@@ -111,7 +111,7 @@ public class MovieDetailsFragment extends Fragment {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			Toast.makeText(act, e.toString() + "", Toast.LENGTH_LONG).show();
+			Toast.makeText(act, e.toString(), Toast.LENGTH_LONG).show();
 		}
 	}
 

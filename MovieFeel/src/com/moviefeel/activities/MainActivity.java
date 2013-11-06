@@ -54,11 +54,11 @@ public class MainActivity extends BaseActivity {
 				etMovieSearch.setAdapter(adapter);
 			}
 			else {
-				Toast.makeText(this, "Please enable a data connection!", Toast.LENGTH_SHORT)
+				Toast.makeText(this, getResources().getString(R.string.enable_data_connection), Toast.LENGTH_SHORT)
 				.show();
 			}
 		} catch (Exception e) {
-			Toast.makeText(this, "Connection timed out", Toast.LENGTH_SHORT)
+			Toast.makeText(this, getResources().getString(R.string.cannot_contact_server), Toast.LENGTH_SHORT)
 					.show();
 		}
 	}
@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity {
 					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
 				} catch (Exception e) {
-					Toast.makeText(MainActivity.this, "Error while searching!", Toast.LENGTH_SHORT)
+					Toast.makeText(MainActivity.this,  getResources().getString(R.string.cannot_contact_server), Toast.LENGTH_SHORT)
 					.show();
 				}
 			}
