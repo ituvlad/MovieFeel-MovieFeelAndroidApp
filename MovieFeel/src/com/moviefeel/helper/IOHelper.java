@@ -9,6 +9,12 @@ import java.io.ObjectOutputStream;
 import android.app.Activity;
 import android.content.Context;
 
+/**
+ * Class that reads and writes from an external file
+ * Currently it is being used to save the ip address in a file
+ * @author Vlad
+ *
+ */
 public class IOHelper {
 	private Activity act;
 

@@ -11,13 +11,24 @@ import com.moviefeel.activities.R;
 import com.moviefeel.helper.Constants;
 import com.moviefeel.helper.IOHelper;
 
+/**
+ * Class that allows setting the ip address of the server
+ * It uses a file to store the ip address and have it available at application startup
+ * @author Vlad
+ *
+ */
 public class IpAddressDialog {
 	
+	/**
+	 * Private methods
+	 */
 	private Activity act;
 	private Dialog dialog;
 	private String ipAddress;
+	
 	public IpAddressDialog(Activity act){
 		this.act = act;
+		//attempt to get the ip address from the file
 		ipAddress = new IOHelper(act).restoreList(Constants.FILENAME);
 		if ( ipAddress == null){
 			ipAddress = Constants.DEFAULT_IP_ADDRESS;

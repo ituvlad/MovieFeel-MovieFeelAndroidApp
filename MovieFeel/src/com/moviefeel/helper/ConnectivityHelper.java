@@ -7,6 +7,11 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+/**
+ * Helper class to read the connectivity state
+ * @author Vlad
+ *
+ */
 public class ConnectivityHelper {
 	
 	

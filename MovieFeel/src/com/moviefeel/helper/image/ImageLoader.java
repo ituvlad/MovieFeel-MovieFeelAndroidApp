@@ -22,6 +22,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
   
+/**
+ * This class retrieves an image bitmap from an url, saves it to the cache and loads it into a given image view
+ * @author Vlad
+ *
+ */
 public class ImageLoader {
   
     MemoryCache memoryCache=new MemoryCache();

@@ -16,6 +16,11 @@ import com.moviefeel.model.Rating;
 import android.os.AsyncTask;
 import android.util.Log;
 
+/**
+ * This class is an async task that makes a request to the server to get details for a specific movie
+ * @author Vlad
+ *
+ */
 public class MovieDetailsGetter extends AsyncTask<String, Void, Movie> {
 
 	ArrayList<Movie> results;

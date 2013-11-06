@@ -1,7 +1,10 @@
 package com.moviefeel.model;
 
-import java.util.ArrayList;
-
+/**
+ * Model class for the movie dto
+ * @author Vlad
+ *
+ */
 public class Movie {
 	/**
 	 * Private attributes

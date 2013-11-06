@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import android.graphics.Bitmap;
   
+/**
+ * All images are first stored in a memory cache, before being stored in the file cache
+ * @author Vlad
+ *
+ */
 public class MemoryCache {
     private Map<String, SoftReference<Bitmap>> cache=Collections.synchronizedMap(new HashMap<String, SoftReference<Bitmap>>());
   

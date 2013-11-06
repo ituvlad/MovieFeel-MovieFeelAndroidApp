@@ -22,6 +22,13 @@ import com.moviefeel.helper.Api_Factory;
 import com.moviefeel.helper.ConnectivityHelper;
 import com.moviefeel.helper.Constants;
 
+/**
+ * Main activity of the application
+ * It's job is to allow searching for movie details and display those details in a fragment
+ * It also contact the server to get a list of movie with which to populate the drop down list
+ * @author Vlad
+ *
+ */
 public class MainActivity extends BaseActivity {
 	private AutoCompleteTextView etMovieSearch;
 	private Button btnMovieSearch;
@@ -39,27 +46,37 @@ public class MainActivity extends BaseActivity {
 		etMovieSearch = (AutoCompleteTextView) findViewById(R.id.etMovieSearch);
 		populateDropDownCombo();
 		btnMovieSearch = (Button) findViewById(R.id.btnMovieSearch);
-		
+
 	}
-	
-	private void populateDropDownCombo(){
+
+	private void populateDropDownCombo() {
 		try {
 			if (ConnectivityHelper.isDataConnectionActivated(this)
 					|| ConnectivityHelper.isWiFiEnabled(this)) {
 				ArrayList<String> myDBData = api.getMovieList(this);
-				ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-						MainActivity.this, android.R.layout.simple_list_item_1,
-						myDBData);
-				adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-				etMovieSearch.setAdapter(adapter);
-			}
-			else {
-				Toast.makeText(this, getResources().getString(R.string.enable_data_connection), Toast.LENGTH_SHORT)
-				.show();
+				if (myDBData != null && myDBData.size() > 0) {
+					ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+							MainActivity.this,
+							android.R.layout.simple_list_item_1, myDBData);
+					adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+					etMovieSearch.setAdapter(adapter);
+				}
+				else{
+					Toast.makeText(this,
+							getResources().getString(R.string.cannot_contact_server),
+							Toast.LENGTH_SHORT).show();
+				}
+			} else {
+				Toast.makeText(
+						this,
+						getResources().getString(
+								R.string.enable_data_connection),
+						Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
-			Toast.makeText(this, getResources().getString(R.string.cannot_contact_server), Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this,
+					e.getMessage(),
+					Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -77,7 +94,8 @@ public class MainActivity extends BaseActivity {
 					contentFrag.setAct(MainActivity.this);
 					contentFrag.setApi(api);
 					contentFrag.setMovieTitle(title);
-					contentFrag.setMovieNiceFormatTitle(etMovieSearch.getText().toString());
+					contentFrag.setMovieNiceFormatTitle(etMovieSearch.getText()
+							.toString());
 
 					FragmentManager fragmentManager = getSupportFragmentManager();
 					FragmentTransaction fragmentTransaction = fragmentManager
@@ -85,14 +103,17 @@ public class MainActivity extends BaseActivity {
 					fragmentTransaction.replace(R.id.fragment_container,
 							contentFrag);
 					fragmentTransaction.commit();
-					
+
 					RelativeLayout mainLayout;
-					mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
-					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+					mainLayout = (RelativeLayout) findViewById(R.id.mainLayout);
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
 				} catch (Exception e) {
-					Toast.makeText(MainActivity.this,  getResources().getString(R.string.cannot_contact_server), Toast.LENGTH_SHORT)
-					.show();
+					Toast.makeText(
+							MainActivity.this,
+							getResources().getString(
+									R.string.cannot_contact_server),
+							Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
@@ -114,9 +135,9 @@ public class MainActivity extends BaseActivity {
 		case R.id.menu_refresh_list:
 			populateDropDownCombo();
 			break;
-		
+
 		}
-		
+
 		return super.onMenuItemSelected(featureId, item);
 	}
 

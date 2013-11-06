@@ -17,6 +17,12 @@ import com.moviefeel.helper.image.ImageLoader;
 import com.moviefeel.model.Movie;
 import com.moviefeel.services.IApi;
 
+/**
+ * Fragment that displays the details for a specific movie that it receives from the main activity
+ * This also makes a call to the opinion mining processing
+ * @author Vlad
+ *
+ */
 public class MovieDetailsFragment extends Fragment {
 	public static final String TAG = Constants.TAG_FRAGMENT_MOVIEDETAILS;
 
@@ -28,9 +34,7 @@ public class MovieDetailsFragment extends Fragment {
 	private IApi api;
 	private String movieTitle;
 	private Movie movie;
-
 	private String movieNiceFormatTitle;
-
 	private Activity act;
 
 	public MovieDetailsFragment() {
@@ -42,21 +46,15 @@ public class MovieDetailsFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_movie_details,
 				container, false);
-
-		movie = api.getInitialMovieDetails(act, movieTitle);
-
+		try {
+			movie = api.getInitialMovieDetails(act, movieTitle);
+		} catch (Exception e) {
+			Toast.makeText(act, e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
 		initUI(rootView);
 		setListeners();
 
 		return rootView;
-	}
-
-	public Activity getAct() {
-		return act;
-	}
-
-	public void setAct(Activity act) {
-		this.act = act;
 	}
 
 	private void initUI(View v) {
@@ -109,7 +107,7 @@ public class MovieDetailsFragment extends Fragment {
 					ivThumbnail);
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 			Toast.makeText(act, e.toString(), Toast.LENGTH_LONG).show();
 		}
@@ -117,7 +115,7 @@ public class MovieDetailsFragment extends Fragment {
 
 	private void setListeners() {
 		btnDoOpinionMining.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO implement action
@@ -125,6 +123,10 @@ public class MovieDetailsFragment extends Fragment {
 		});
 	}
 
+	/**
+	 * Getters and setters
+	 * @return
+	 */
 	public IApi getApi() {
 		return api;
 	}
@@ -147,5 +149,13 @@ public class MovieDetailsFragment extends Fragment {
 
 	public void setMovieNiceFormatTitle(String movieNiceFormatTitle) {
 		this.movieNiceFormatTitle = movieNiceFormatTitle;
+	}
+	
+	public Activity getAct() {
+		return act;
+	}
+
+	public void setAct(Activity act) {
+		this.act = act;
 	}
 }

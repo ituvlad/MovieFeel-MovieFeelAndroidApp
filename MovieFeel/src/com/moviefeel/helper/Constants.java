@@ -1,5 +1,10 @@
 package com.moviefeel.helper;
 
+/**
+ * Helper class that holds constants that cannot be read from the strings file
+ * @author Vlad
+ *
+ */
 public class Constants {
 	
 	public static final String TAG_FRAGMENT_LATESTHEADLINES = "tag_latest_headlines";

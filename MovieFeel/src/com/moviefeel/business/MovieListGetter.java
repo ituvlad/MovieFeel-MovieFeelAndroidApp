@@ -11,6 +11,11 @@ import org.json.JSONArray;
 import android.os.AsyncTask;
 import android.util.Log;
 
+/**
+ * This async makes a request to get a list a of movie names with which to populate the dropdown combo
+ * @author Vlad
+ *
+ */
 public class MovieListGetter extends AsyncTask<String, Void, ArrayList<String>> {
 
 	ArrayList<String> results;

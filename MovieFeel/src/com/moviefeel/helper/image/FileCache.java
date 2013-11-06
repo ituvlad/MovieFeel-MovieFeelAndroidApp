@@ -3,6 +3,11 @@ package com.moviefeel.helper.image;
 import java.io.File;
 import android.content.Context;
   
+/**
+ * Class that saves the images retrieved from an url to a file cache in order to improve efficiency
+ * @author Vlad
+ *
+ */
 public class FileCache {
   
     private File cacheDir;

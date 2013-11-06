@@ -4,14 +4,18 @@ import android.app.Activity;
 import com.moviefeel.services.IApi;
 import com.moviefeel.services.implementation.ApiMoviefeel;
 
+/**
+ * Factory that creates apis given as a parameter 
+ * @author Vlad
+ *
+ */
 public class Api_Factory {
 	private static IApi api;
 
 	/**
 	 * 
 	 * @param type
-	 *            The type of the API (Kinvey, or some other service we will
-	 *            have)
+	 *            
 	 * @return
 	 */
 	public static IApi getApi(String type, Activity context) {
