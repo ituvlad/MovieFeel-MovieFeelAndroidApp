@@ -41,6 +41,7 @@ public class MovieProcessingResultsGetter extends
 			OpinionRating opinionRating = null;
 			URL link = new URL(urls[0]);
 			URLConnection tc = link.openConnection();
+			tc.setConnectTimeout(999999999);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					tc.getInputStream()));
 
