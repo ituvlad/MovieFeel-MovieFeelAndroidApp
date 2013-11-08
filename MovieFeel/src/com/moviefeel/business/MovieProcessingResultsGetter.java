@@ -101,6 +101,7 @@ public class MovieProcessingResultsGetter extends
 	protected void onPreExecute() {
 		this.dialog.setMessage("Processing...");
 		this.dialog.show();
+		this.dialog.setCancelable(false);
 	}
 
 	protected void onPostExecute(final Boolean success) {

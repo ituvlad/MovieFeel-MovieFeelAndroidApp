@@ -50,6 +50,7 @@ public class MovieDetailsGetter extends AsyncTask<String, Void, Movie> {
 		dialog = new ProgressDialog(act);
 		this.dialog.setMessage("Fetching...");
 		this.dialog.show();
+		this.dialog.setCancelable(false);
 	}
 
 	protected void onPostExecute(final Boolean success) {
