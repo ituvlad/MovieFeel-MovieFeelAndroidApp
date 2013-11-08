@@ -63,7 +63,7 @@ public class GetHandler {
 			throws InterruptedException, ExecutionException {
 		new MovieProcessingResultsGetter(context,title,api).execute(
 				"http://" + ipAddress
-						+ "/MovieFeel-0.1/rest/getMovieRating?title="
+						+ "/MovieFeel-0.1/rest/getMovieRating?id="
 						+ title);
 	}
 
