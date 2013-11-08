@@ -1,6 +1,7 @@
 package com.moviefeel.activities;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,8 +17,10 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.moviefeel.business.MovieDetailsGetter;
 import com.moviefeel.dialogs.IpAddressDialog;
 import com.moviefeel.fragments.MovieDetailsFragment;
+import com.moviefeel.fragments.MovieProcessingResultsFragment;
 import com.moviefeel.helper.Api_Factory;
 import com.moviefeel.helper.ConnectivityHelper;
 import com.moviefeel.helper.Constants;
@@ -49,7 +52,7 @@ public class MainActivity extends BaseActivity {
 
 	}
 
-	private void populateDropDownCombo() {
+	public void populateDropDownCombo() {
 		try {
 			if (ConnectivityHelper.isDataConnectionActivated(this)
 					|| ConnectivityHelper.isWiFiEnabled(this)) {
@@ -85,40 +88,20 @@ public class MainActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				String title = etMovieSearch.getText().toString()
+						.split("\\(")[0].replace(' ', '+');
+				title = title.substring(0, title.length() - 1);
 				try {
-					String title = etMovieSearch.getText().toString()
-							.split("\\(")[0].replace(' ', '+');
-					title = title.substring(0, title.length() - 1);
-
-					MovieDetailsFragment contentFrag = new MovieDetailsFragment();
-					contentFrag.setAct(MainActivity.this);
-					contentFrag.setApi(api);
-					contentFrag.setMovieTitle(title);
-					contentFrag.setMovieNiceFormatTitle(etMovieSearch.getText()
-							.toString());
-
-					FragmentManager fragmentManager = getSupportFragmentManager();
-					FragmentTransaction fragmentTransaction = fragmentManager
-							.beginTransaction();
-					fragmentTransaction.replace(R.id.fragment_container,
-							contentFrag);
-					fragmentTransaction.commit();
-
-					RelativeLayout mainLayout;
-					mainLayout = (RelativeLayout) findViewById(R.id.mainLayout);
-					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
+					api.getInitialMovieDetails(MainActivity.this, title, api, etMovieSearch.getText().toString());
 				} catch (Exception e) {
-					Toast.makeText(
-							MainActivity.this,
-							getResources().getString(
-									R.string.cannot_contact_server),
+					Toast.makeText(MainActivity.this,
+							e.getMessage(),
 							Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

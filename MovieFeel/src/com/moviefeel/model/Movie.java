@@ -9,15 +9,15 @@ public class Movie {
 	/**
 	 * Private attributes
 	 */
+	private String id;
 	private String title;
 	
 	private String mpaa_rating;
-	private String critics_consensus;
-	private String runtime;
 	private String synopsis;
 	
 	private Poster poster;
 	private Rating rating;
+	private OpinionRating opinionRating;
 	
 	/**
 	 * Constructors
@@ -26,14 +26,12 @@ public class Movie {
 	public Movie(){}
 	
 	
-	public Movie(Rating rating,Poster poster, String mpaa_rating,
-			String critics_consensus,String runtime,String synopsis) {
+	public Movie(Rating rating,Poster poster,String id, String mpaa_rating,String synopsis) {
 		super();
+		this.id = id;
 		this.rating = rating;
 		this.setPoster(poster);
 		this.mpaa_rating = mpaa_rating;
-		this.critics_consensus = critics_consensus;
-		this.runtime = runtime;
 		this.synopsis = synopsis;
 	}
 	
@@ -59,41 +57,33 @@ public class Movie {
 	public void setMpaa_rating(String mpaa_rating) {
 		this.mpaa_rating = mpaa_rating;
 	}
-	public String getCritics_consensus() {
-		return critics_consensus;
-	}
-	public void setCritics_consensus(String critics_consensus) {
-		this.critics_consensus = critics_consensus;
-	}
-
-
-	public String getRuntime() {
-		return runtime;
-	}
-
-
-	public void setRuntime(String runtime) {
-		this.runtime = runtime;
-	}
-
-
 	public String getSynopsis() {
 		return synopsis;
 	}
-
-
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
-
-
 	public Poster getPoster() {
 		return poster;
 	}
-
-
 	public void setPoster(Poster poster) {
 		this.poster = poster;
+	}
+	public OpinionRating getOpinionRating() {
+		return opinionRating;
+	}
+	public void setOpinionRating(OpinionRating opinionRating) {
+		this.opinionRating = opinionRating;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

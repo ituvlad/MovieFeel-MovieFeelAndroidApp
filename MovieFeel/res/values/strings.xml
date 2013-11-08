@@ -24,4 +24,10 @@
     <string name="btn_do_opinion_mining_text">Get statistics</string>
     <string name="cannot_contact_server">Cannot contact server!</string>
 	<string name="enable_data_connection">Please enable data connection.</string>
+	<string name="anger_title">Anger rating:</string>
+	<string name="disgust_title">Disgust rating:</string>
+	<string name="fear_title">Fear rating:</string>
+	<string name="joy_title">Joy rating:</string>
+	<string name="processed_title">Processed rating:</string>
+	<string name="surprise_title">Surprise rating:</string>
 </resources>

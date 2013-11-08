@@ -5,15 +5,17 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 
+import com.moviefeel.activities.MainActivity;
 import com.moviefeel.helper.Constants;
 import com.moviefeel.helper.IOHelper;
-import com.moviefeel.model.Movie;
+import com.moviefeel.model.OpinionRating;
+import com.moviefeel.services.IApi;
 
 /**
- * This is a handler class for the get requests
- * All requests go through this
+ * This is a handler class for the get requests All requests go through this
+ * 
  * @author Vlad
- *
+ * 
  */
 public class GetHandler {
 
@@ -21,14 +23,16 @@ public class GetHandler {
 	 * Private methods
 	 */
 	private MovieListGetter movieListGetter;
-	private MovieDetailsGetter movieDetailsGetter;
+//	private MovieDetailsGetter movieDetailsGetter;
+//	private MovieProcessingResultsGetter movieProcessingResultsGetter;
 	private String ipAddress;
 	private Activity act;
 
 	public GetHandler(Activity act) {
 		this.act = act;
 		movieListGetter = new MovieListGetter();
-		movieDetailsGetter = new MovieDetailsGetter();
+//		movieDetailsGetter = new MovieDetailsGetter(act,title,api,niceFormat);
+//		movieProcessingResultsGetter = new MovieProcessingResultsGetter(context,title,api);
 		ipAddress = getIpAddress();
 		if (ipAddress == null) {
 			ipAddress = Constants.DEFAULT_IP_ADDRESS;
@@ -37,8 +41,7 @@ public class GetHandler {
 
 	public ArrayList<String> getMovieList() throws InterruptedException,
 			ExecutionException {
-		ArrayList<String> arr = null;
-		arr = movieListGetter
+		ArrayList<String> arr = movieListGetter
 				.execute(
 						"http://" + ipAddress
 								+ "/MovieFeel-0.1/rest/getAllMovieTitles")
@@ -46,16 +49,22 @@ public class GetHandler {
 		return arr;
 	}
 
-	public Movie getInitialMovieDetails(String movieTitle)
+	public void getInitialMovieDetails(Activity activity, String title,IApi api, String niceFormat)
 			throws InterruptedException, ExecutionException {
-		Movie movie = null;
-		movie = movieDetailsGetter
+		new MovieDetailsGetter(activity,title,api,niceFormat)
 				.execute(
 						"http://"
 								+ ipAddress
 								+ "/MovieFeel-0.1/rest/getInitialMovieDetailsForTitle?title="
-								+ movieTitle).get();
-		return movie;
+								+ title);
+	}
+
+	public void getOpinionRating(Activity context,String title,IApi api)
+			throws InterruptedException, ExecutionException {
+		new MovieProcessingResultsGetter(context,title,api).execute(
+				"http://" + ipAddress
+						+ "/MovieFeel-0.1/rest/getMovieRating?title="
+						+ title);
 	}
 
 	private String getIpAddress() {

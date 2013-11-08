@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutionException;
 import android.app.Activity;
 
 import com.moviefeel.business.GetHandler;
-import com.moviefeel.model.Movie;
+import com.moviefeel.services.IApi;
 import com.moviefeel.services.IMovieServices;
 
 /**
@@ -17,8 +17,8 @@ import com.moviefeel.services.IMovieServices;
 public class MovieServicesImpl implements IMovieServices{
 
 	@Override
-	public String getMovieRating(Movie movie) {
-		return "some rating";
+	public void getMovieRating(Activity context,String title,IApi api) throws InterruptedException, ExecutionException{
+		new GetHandler(context).getOpinionRating(context,title,api);
 	}
 
 	@Override
@@ -27,8 +27,8 @@ public class MovieServicesImpl implements IMovieServices{
 	}
 
 	@Override
-	public Movie getInitialMovieDetails(Activity act,String movieTitle) throws InterruptedException, ExecutionException {
-		return new GetHandler(act).getInitialMovieDetails(movieTitle);
+	public void getInitialMovieDetails(Activity activity, String title,IApi api, String niceFormat) throws InterruptedException, ExecutionException {
+		new GetHandler(activity).getInitialMovieDetails(activity,title,api,niceFormat);
 	}
 
 }

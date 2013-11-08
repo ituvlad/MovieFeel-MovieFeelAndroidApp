@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 
-import com.moviefeel.model.Movie;
 import com.moviefeel.services.IApi;
 import com.moviefeel.services.IMovieServices;
 
@@ -34,11 +33,11 @@ public class ApiMoviefeel implements IApi{
 	}
 	
 	@Override
-	public String getMovieRating(Movie movie) {
+	public void getMovieRating(Activity context,String title,IApi api)
+			throws InterruptedException, ExecutionException{
 		if (movieServices != null){
-			return movieServices.getMovieRating(movie);
+			movieServices.getMovieRating(context,title,api);
 		}
-		return "";
 	}
 	
 	@Override
@@ -47,8 +46,8 @@ public class ApiMoviefeel implements IApi{
 	}
 	
 	@Override
-	public Movie getInitialMovieDetails(Activity act,String movieTitle) throws InterruptedException, ExecutionException{
-		return movieServices.getInitialMovieDetails(act,movieTitle);
+	public void getInitialMovieDetails(Activity activity, String title,IApi api, String niceFormat) throws InterruptedException, ExecutionException{
+		movieServices.getInitialMovieDetails(activity,title,api,niceFormat);
 	}
 	
 	

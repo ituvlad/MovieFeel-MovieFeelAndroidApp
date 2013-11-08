@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,67 +38,83 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/ivThumbnail"
-                android:textColor="#FFFFFF"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/tvCriticsRatingUpTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvMovieTitle"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@+id/ivThumbnail"
-                android:text="@string/tv_critics_rating_title"
-                android:textColor="#FFFFFF"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/tvCriticsRatingUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCriticsRatingUpTitle"
-                android:textColor="#FFFFFF"
-                android:layout_toRightOf="@+id/ivThumbnail" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/tvAudienceRatingUpTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCriticsRatingUp"
+                android:layout_below="@+id/tvMovieTitle"
                 android:layout_toRightOf="@+id/ivThumbnail"
                 android:text="@string/tv_audience_rating_title"
-                android:textColor="#FFFFFF"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/tvAudienceRatingUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvAudienceRatingUpTitle"
-                android:textColor="#FFFFFF"
-                android:layout_toRightOf="@+id/ivThumbnail" />
-            
-            <Button 
+                android:layout_toRightOf="@+id/ivThumbnail"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvAudienceScoreTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ivThumbnail"
+                android:layout_below="@+id/tvAudienceRatingUp"
+                android:text="@string/tv_audience_score_title"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvAudienceScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ivThumbnail"
+                android:layout_below="@+id/tvAudienceScoreTitle"
+                android:textColor="#FFFFFF" />
+
+            <Button
                 android:id="@+id/btnDoOpinionMining"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/tvAudienceRatingUp"
-                android:textColor="#FFFFFF"
+                android:layout_below="@+id/tvAudienceScore"
                 android:text="@string/btn_do_opinion_mining_text"
-                />
+                android:textColor="#FFFFFF" />
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvCriticsScoreTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/rlThumbnail"
+            android:text="@string/tv_critics_score_title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/tvCriticsScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvCriticsScoreTitle"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/tvSynopsisTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/rlThumbnail"
+            android:layout_below="@+id/tvCriticsScore"
             android:text="@string/tv_synopsis_title"
-            android:textColor="#FFFFFF"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF" />
 
         <RelativeLayout
             android:id="@+id/rlSynopsis"
@@ -113,110 +129,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:textColor="#FFFFFF"
-                android:layout_alignParentTop="true" />
+                android:layout_alignParentTop="true"
+                android:textColor="#FFFFFF" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvMpaaTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/rlSynopsis"
-            android:paddingTop="5dp"
-            android:textColor="#FFFFFF"
-            android:text="@string/tv_mpaa_rating_title"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tvMpaaRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tvMpaaTitle"
-            android:textColor="#FFFFFF"
-            android:layout_marginLeft="5dp" />
-
-        <TextView
-            android:id="@+id/tvCriticsConsensusTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tvMpaaRating"
-            android:textColor="#FFFFFF"
-            android:text="@string/tv_critics_consensus_title"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <RelativeLayout
-            android:id="@+id/rlCriticsConsensus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tvCriticsConsensusTitle"
-            android:layout_marginTop="5dp" >
-
-            <TextView
-                android:id="@+id/tvCriticsConsensus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:textColor="#FFFFFF"
-                android:layout_alignParentTop="true" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tvCriticsScoreTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/rlCriticsConsensus"
-            android:text="@string/tv_critics_score_title"
-            android:textColor="#FFFFFF"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tvCriticsScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/tvCriticsScoreTitle" />
-
-        <TextView
-            android:id="@+id/tvAudienceScoreTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tvCriticsScore"
-            android:text="@string/tv_audience_score_title"
-            android:textColor="#FFFFFF"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tvAudienceScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/tvAudienceScoreTitle" />
-
-        <TextView
-            android:id="@+id/tvRuntimeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tvAudienceScore"
-            android:text="@string/tv_runtime_title"
-            android:textColor="#FFFFFF"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tvRuntime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/tvRuntimeTitle" />
     </RelativeLayout>
 
 </ScrollView>

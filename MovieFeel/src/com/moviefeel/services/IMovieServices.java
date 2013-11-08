@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 
-import com.moviefeel.model.Movie;
 
 /**
  * Interface that defines the methods needed for creating movie services
@@ -14,8 +13,8 @@ import com.moviefeel.model.Movie;
  */
 public interface IMovieServices {
 	
-	public String getMovieRating(Movie movie);
+	public void getMovieRating(Activity context,String title,IApi api) throws InterruptedException, ExecutionException;
 	public ArrayList<String> getMovieList(Activity act) throws InterruptedException, ExecutionException;
-	public Movie getInitialMovieDetails(Activity act,String movieTitle) throws InterruptedException, ExecutionException;
+	public void getInitialMovieDetails(Activity activity, String title,IApi api, String niceFormat) throws InterruptedException, ExecutionException;
 
 }
